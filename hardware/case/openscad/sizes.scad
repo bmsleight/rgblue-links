@@ -13,4 +13,5 @@ curve_d = 4;
 curve_r = curve_d/2;
 
 $fn=100;
-
+//$fa=0.125;
+//$fs=0.125;

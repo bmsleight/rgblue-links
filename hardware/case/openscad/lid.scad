@@ -1,8 +1,6 @@
 include <sizes.scad>
 use <roundedBoxSimple.scad>
 
-$fn=100;
-
 
 module lid()
 {

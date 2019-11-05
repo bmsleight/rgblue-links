@@ -15,5 +15,5 @@ difference()
         translate([0,0,21.9]) rotate([180,0,0]) middle();
         translate([0,0,30.9]) rotate([180,0,0]) topLid();
     }
-    translate([50,50,0]) cube([100,100,100], center=true);
+    translate([50,-50,0]) cube([100,100,100], center=true);
 }
