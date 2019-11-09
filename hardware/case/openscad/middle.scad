@@ -11,12 +11,12 @@ module tube()
     difference()
     {
         union() {
-            translate([0,0,-12.5])  cylinder(h=9, d=7., center=true);
-            translate([0,0,2-10])  tubeSocket();
+            translate([0,0,-11])  cylinder(h=12, d=6.5, center=true);
+            translate([0,0,2-10+3.])  tubeThread();
             
             translate([0,0,-7.5-(19/2)+1.75])
             {
-                cylinder(h=2, d1=7.+4, d2=7., center=true);
+//                cylinder(h=2, d1=6.5+4, d2=6.5, center=true);
             }
 
         }
@@ -41,8 +41,6 @@ module bottomCase(full=true)
         translate([0,0,-2]) cube([inner_space_x,inner_space_y,inner_space_z+2], center=true);
         // Easier to print         // Change from 3.5 to 3mm
         translate([0,0,15])  cylinder(h=30, d=2.5, center=true);   
-        // Easier to print         // Change from 3.5 to 3mm
-        translate([0,0,-0.8]) cube([inner_space_x,2.5,inner_space_z], center=true);
     }
 }
 
@@ -64,13 +62,39 @@ module tubeSocket() {
     
 }
 
-module middle()
+module tubeThread()
 {
-    translate([0,0,-5]) bottomCase();  
-    translate([0,0,12.5+2+0.2]) tube();
+    rotate([0,0,45/2-45/2]) trapezoidThread( 
+        length=4,
+        pitch= 1,
+        // Change from 2.75 to 2mm
+        pitchRadius=3.,
+        clearance=0.1,
+        backlash=0.3,
+        stepsPerTurn = 60
+    );
+}
+
+
+module middle(printBetter=false)
+{
+    difference()
+    {
+        union()
+        {
+            translate([0,0,-5]) bottomCase();
+            translate([0,0,12.5+2+0.2]) tube();
+        }
+        if (printBetter)
+            {
+                // Easier to print         // Change from 3.5 to 3mm
+  #              translate([0,0,-6.0 + 0.2]) cube([inner_space_x,2.5,inner_space_z], center=true);
+  #              translate([0,0,-6.0 + 0.4]) cube([2.5,2.5,inner_space_z], center=true);
+            }
+    }   
 }
 
 
 
 // Print with brim 
-rotate([0,0,0]) middle();
+rotate([0,0,0]) middle(printBetter=true);
